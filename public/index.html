@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WebRTC Video Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WebRTC Video Chat</h1>
+            <div class="status-container">
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="video-container">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <video id="localVideo" autoplay playsinline muted></video>
+        </div>
+
+        <div class="controls">
+            <button id="startCallBtn" class="btn btn-primary" disabled>
+                <span class="btn-icon">📞</span>
+                Start Call
+            </button>
+            <button id="aiModeBtn" class="btn btn-ai">
+                <span class="btn-icon">🤖</span>
+                AI Mode
+            </button>
+            <button id="hangUpBtn" class="btn btn-danger" disabled>
+                <span class="btn-icon">📵</span>
+                Hang Up
+            </button>
+            <button id="muteBtn" class="btn btn-secondary" disabled>
+                <span class="btn-icon">🎤</span>
+                Mute
+            </button>
+            <button id="videoToggleBtn" class="btn btn-secondary" disabled>
+                <span class="btn-icon">📹</span>
+                Camera Off
+            </button>
+            <button id="speakerBtn" class="btn btn-secondary" disabled>
+                <span class="btn-icon">🔊</span>
+                Speaker
+            </button>
+        </div>
+
+        <div class="ai-indicators" id="aiIndicators" style="display: none;">
+            <span id="listeningIndicator" class="indicator listening">🎤 Listening...</span>
+            <span id="speakingIndicator" class="indicator speaking">🔊 Speaking...</span>
+        </div>
+
+        <div class="conversation-panel" id="conversationPanel" style="display: none;">
+            <h3>Conversation</h3>
+            <div class="conversation-history" id="conversationHistory"></div>
+        </div>
+
+        <div class="info-box" id="infoBox">
+            <p>Waiting for peer to connect...</p>
+        </div>
+    </div>
+
+    <script src="ai-mode.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>

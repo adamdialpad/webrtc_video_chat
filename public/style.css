@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fbbf24;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.connected {
+    background: #10b981;
+}
+
+.status-indicator.disconnected {
+    background: #ef4444;
+}
+
+.status-indicator.in-call {
+    background: #3b82f6;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.video-container {
+    position: relative;
+    background: #000;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+}
+
+video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#remoteVideo {
+    top: 0;
+    left: 0;
+    background: #1f2937;
+}
+
+#localVideo {
+    width: 240px;
+    height: 180px;
+    top: 20px;
+    right: 20px;
+    border: 3px solid white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scaleX(-1); /* Mirror effect for local video */
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-icon {
+    font-size: 20px;
+}
+
+.btn-primary {
+    background: #10b981;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.btn-secondary {
+    background: #6366f1;
+    color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #4f46e5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.btn-secondary.active {
+    background: #94a3b8;
+}
+
+.info-box {
+    padding: 20px 30px;
+    background: #f3f4f6;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    text-align: center;
+    font-size: 14px;
+}
+
+.info-box.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.info-box.success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+/* AI Mode Styles */
+.btn-ai {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-ai:hover:not(:disabled) {
+    background: linear-gradient(135deg, #5568d3 0%, #6a4193 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+}
+
+.btn-ai.active {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    animation: pulse-ai 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ai {
+    0%, 100% { box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.6); }
+}
+
+.ai-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.indicator {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    display: none;
+}
+
+.indicator.listening {
+    background: #dbeafe;
+    color: #1e40af;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.indicator.speaking {
+    background: #fef3c7;
+    color: #92400e;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.conversation-panel {
+    max-height: 300px;
+    background: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    padding: 20px;
+}
+
+.conversation-panel h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #374151;
+}
+
+.conversation-history {
+    max-height: 240px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message.user {
+    background: #dbeafe;
+    color: #1e40af;
+    align-self: flex-end;
+    max-width: 80%;
+}
+
+.message.ai {
+    background: #fef3c7;
+    color: #92400e;
+    align-self: flex-start;
+    max-width: 80%;
+}
+
+.message strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        max-width: 100%;
+        border-radius: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .video-container {
+        flex: 1;
+        padding-top: 0;
+    }
+
+    #localVideo {
+        width: 120px;
+        height: 90px;
+        top: 10px;
+        right: 10px;
+        border-width: 2px;
+    }
+
+    .controls {
+        padding: 20px 15px;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        min-width: 110px;
+    }
+
+    .btn-icon {
+        font-size: 18px;
+    }
+
+    .info-box {
+        padding: 15px 20px;
+        font-size: 13px;
+    }
+}
+
+/* Landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+    #localVideo {
+        width: 160px;
+        height: 120px;
+    }
+}
