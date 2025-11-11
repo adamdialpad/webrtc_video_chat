@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>WebRTC Video Chat</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js for 3D avatar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
     <div class="container">
@@ -19,6 +23,9 @@
         <div class="video-container">
             <video id="remoteVideo" autoplay playsinline></video>
             <video id="localVideo" autoplay playsinline muted></video>
+            <div class="avatar-container" id="avatarContainer" style="display: none;">
+                <!-- 3D avatar will be rendered here -->
+            </div>
         </div>
 
         <div class="controls">
@@ -63,6 +70,7 @@
         </div>
     </div>
 
+    <script src="avatar-animator-3d.js"></script>
     <script src="ai-mode.js"></script>
     <script src="client.js"></script>
 </body>

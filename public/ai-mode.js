@@ -147,11 +147,20 @@ class AIMode {
     utterance.onstart = () => {
       this.isSpeaking = true;
       this.updateUISpeaking(true);
+      // Start avatar animation
+      if (typeof avatarAnimator !== 'undefined') {
+        avatarAnimator.start();
+      }
     };
 
     utterance.onend = () => {
       this.isSpeaking = false;
       this.updateUISpeaking(false);
+
+      // Stop avatar animation
+      if (typeof avatarAnimator !== 'undefined') {
+        avatarAnimator.stop();
+      }
 
       // Resume listening after AI finishes speaking
       // Longer delay to ensure audio output has fully stopped
@@ -166,6 +175,10 @@ class AIMode {
       console.error('Speech synthesis error:', event);
       this.isSpeaking = false;
       this.updateUISpeaking(false);
+      // Stop avatar animation on error
+      if (typeof avatarAnimator !== 'undefined') {
+        avatarAnimator.stop();
+      }
       if (this.isEnabled) {
         this.startListening();
       }
@@ -202,6 +215,11 @@ class AIMode {
     this.conversationHistory = [];
     console.log('🤖 AI Mode enabled');
 
+    // Show avatar
+    if (typeof avatarAnimator !== 'undefined') {
+      avatarAnimator.show();
+    }
+
     // Send initial greeting trigger
     // AI will greet when user first speaks
     setTimeout(() => {
@@ -220,6 +238,13 @@ class AIMode {
     this.isEnabled = false;
     this.stopListening();
     this.synthesis.cancel();
+
+    // Hide avatar and stop animation
+    if (typeof avatarAnimator !== 'undefined') {
+      avatarAnimator.stop();
+      avatarAnimator.hide();
+    }
+
     console.log('🤖 AI Mode disabled');
   }
 

@@ -21,6 +21,9 @@ body {
     border-radius: 16px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: auto;
 }
 
 header {
@@ -77,7 +80,8 @@ h1 {
     position: relative;
     background: #000;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    height: 600px; /* Fixed height */
+    flex-shrink: 0; /* Prevent shrinking */
     overflow: hidden;
 }
 
@@ -103,6 +107,7 @@ video {
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     transform: scaleX(-1); /* Mirror effect for local video */
+    z-index: 20; /* Above avatar container */
 }
 
 .controls {
@@ -112,6 +117,7 @@ video {
     gap: 15px;
     padding: 30px;
     flex-wrap: wrap;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .btn {
@@ -182,6 +188,12 @@ video {
     color: #6b7280;
     text-align: center;
     font-size: 14px;
+    min-height: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .info-box.error {
@@ -216,6 +228,27 @@ video {
     50% { box-shadow: 0 4px 20px rgba(239, 68, 68, 0.6); }
 }
 
+/* Avatar Container (for 3D avatar) - positioned in video container */
+.avatar-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.avatar-container canvas {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    max-height: 90%;
+}
+
 .ai-indicators {
     display: flex;
     justify-content: center;
@@ -223,6 +256,7 @@ video {
     padding: 15px;
     background: #f9fafb;
     border-top: 1px solid #e5e7eb;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .indicator {
@@ -246,10 +280,14 @@ video {
 }
 
 .conversation-panel {
+    height: 300px;
+    min-height: 300px;
     max-height: 300px;
+    flex-shrink: 0; /* Prevent shrinking */
     background: #f9fafb;
     border-top: 1px solid #e5e7eb;
     padding: 20px;
+    overflow: hidden;
 }
 
 .conversation-panel h3 {
@@ -259,6 +297,8 @@ video {
 }
 
 .conversation-history {
+    height: 240px;
+    min-height: 240px;
     max-height: 240px;
     overflow-y: auto;
     display: flex;
