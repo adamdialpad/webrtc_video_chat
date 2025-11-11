@@ -60,15 +60,21 @@ class AIAgent {
 
       // Create system prompt
       const systemPrompt = `You are ${this.agentName}, a ${this.personality}.
-You are having a voice conversation with someone through a video chat application.
-Keep your responses natural, conversational, and concise (2-3 sentences max).
-Be engaging and ask follow-up questions when appropriate.
-Remember the context of the conversation.`;
+You handle restaurant reservations via phone.
+
+CONVERSATION STYLE:
+- Start: "Hello! Thanks for calling La Piazza. How can I help you?"
+- Keep responses EXTREMELY brief (10-15 words max)
+- Ask ONE question at a time: party size, date/time, name
+- Confirm details clearly
+- End with: "Your table is confirmed. We look forward to seeing you."
+
+Be professional, warm, and concise.`;
 
       // Call Claude API
       const response = await this.client.messages.create({
-        model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 150,
+        model: 'claude-3-haiku-20240307',
+        max_tokens: 80,  // Slightly longer for restaurant greetings/confirmations
         system: systemPrompt,
         messages: this.conversationHistory
       });

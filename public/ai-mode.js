@@ -38,7 +38,7 @@ class AIMode {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     this.recognition = new SpeechRecognition();
 
-    this.recognition.continuous = true;
+    this.recognition.continuous = false;  // Changed to false to prevent auto-restart
     this.recognition.interimResults = false;
     this.recognition.lang = 'en-US';
 
@@ -53,13 +53,14 @@ class AIMode {
       this.isListening = false;
       this.updateUIListening(false);
 
-      // Restart if AI mode is still enabled
+      // Only restart if AI mode is enabled AND not speaking
+      // Longer delay to prevent picking up tail of speech
       if (this.isEnabled && !this.isSpeaking) {
         setTimeout(() => {
-          if (this.isEnabled) {
+          if (this.isEnabled && !this.isSpeaking) {
             this.startListening();
           }
-        }, 100);
+        }, 500);
       }
     };
 
@@ -122,6 +123,9 @@ class AIMode {
       return;
     }
 
+    // CRITICAL: Stop listening immediately to prevent feedback loop
+    this.stopListening();
+
     // Cancel any ongoing speech
     this.synthesis.cancel();
 
@@ -150,10 +154,11 @@ class AIMode {
       this.updateUISpeaking(false);
 
       // Resume listening after AI finishes speaking
+      // Longer delay to ensure audio output has fully stopped
       if (this.isEnabled) {
         setTimeout(() => {
           this.startListening();
-        }, 500);
+        }, 1000);
       }
     };
 
@@ -197,13 +202,16 @@ class AIMode {
     this.conversationHistory = [];
     console.log('🤖 AI Mode enabled');
 
-    // Start listening
-    this.startListening();
-
-    // Send initial greeting
+    // Send initial greeting trigger
+    // AI will greet when user first speaks
     setTimeout(() => {
-      this.sendToAI('Hello');
-    }, 1000);
+      this.sendToAI('start');
+    }, 500);
+
+    // Start listening after greeting
+    setTimeout(() => {
+      this.startListening();
+    }, 2000);
 
     return true;
   }

@@ -1,0 +1,47 @@
+Scenario
+
+Human calls “La Piazza” Italian restaurant.
+AI agent handles reservations automatically.
+
+Round 1
+
+AI Agent:
+Hello! Thanks for calling La Piazza. I’m your virtual assistant. How can I help you today?
+
+Human:
+Hi, I’d like to book a table for dinner tomorrow night.
+
+Round 2
+
+AI Agent:
+Of course! How many people will be joining you?
+
+Human:
+There will be four of us.
+
+Round 3
+
+AI Agent:
+Got it — four guests. What time would you like to dine?
+
+Human:
+Around 7 p.m., if possible.
+
+Round 4
+
+AI Agent:
+Let me check… We have availability at 6:45 or 7:15. Which one works better for you?
+
+Human:
+7:15 works great.
+
+Round 5
+
+AI Agent:
+Perfect. I’ve reserved a table for four at La Piazza tomorrow at 7:15 p.m. under your name — could I have your name, please?
+
+Human:
+Sure, it’s Alex Chen.
+
+AI Agent:
+Thanks, Alex! Your table is confirmed. We look forward to seeing you tomorrow evening.
